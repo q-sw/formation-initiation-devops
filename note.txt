@@ -1,0 +1,73 @@
+Provider
+    Connection configuration for a specific provider like AWS / GCP / VMware
+Resources
+    Provider resource configuration 
+    VM / Network / storage
+States files
+    file that represent the infrastructure status
+Backend
+    configuration where store the state file
+
+
+
+Input variables
+different type:
+    string
+    number
+    boolen
+    list
+    object / map
+
+Different way to define 
+    Manualy
+    Default value
+    Env var TF_VAR_[var name]
+    terraform.tfvars file
+    *.auto.tfvars file
+    Command line -var or -var-file parameter
+
+Output
+    return value after from resource
+
+Terraform module
+    they are containers for multiples resources that are used together
+    A module consite of a collection of TF file kept together in a directory
+    Main way to package and reuse resources configuration
+
+
+
+---
+## Le glossaire Terraform
+
+<table style="margin-left: auto; margin-right: auto;">
+  <tr>
+    <th style="background-color: rgb(69,90,99); color: white">Type</th>
+    <th style="background-color: rgb(69,90,99); color: white">Définition</th>
+  </tr>
+  <tr>
+    <td style="font-size: xx-large">Provider</td>
+    <td style="font-size: xx-large">Configuration de connexion à une API (AWS/ GCP/ VMware...)</td>
+  </tr>
+    <tr>
+    <td style="font-size: xx-large">Resources</td>
+    <td style="font-size: xx-large">Bloque de code définissant une ressource (VM / Réseau + Stockage ...)</td>
+  </tr>
+    <tr>
+    <td style="font-size: xx-large">State files</td>
+    <td style="font-size: xx-large">Fichier décrivant l'insfrastructure déployée</td>
+  </tr>
+    <tr>
+    <td style="font-size: xx-large">Backend</td>
+    <td style="font-size: xx-large">Lieux de stockage des state files (local/ S3 / GCS ...)</td>
+  </tr>
+    <tr>
+    <td style="font-size: xx-large">Input variables</td>
+    <td style="font-size: xx-large">Ensemble de variable utiliser dans les scripts</td>
+  </tr>
+  </tr>
+    <tr>
+    <td style="font-size: xx-large">Output</td>
+    <td style="font-size: xx-large">Information de sortie de script</td>
+  </tr>
+  
+</table>
