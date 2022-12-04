@@ -44,9 +44,9 @@ Quentin SWIECH
 
 Certifications:
 
-![width:550](./img/certifcation.png)
+![width:550](./img/intro_certifcation.png)
 
-![bg fit right:45% margin-right:20px](./img/my_skills.png)
+![bg fit right:45% margin-right:20px](./img/intro_my_skills.png)
 
 ---
 ## Agenda
@@ -60,26 +60,26 @@ Certifications:
 # Introduction Générale
 ## Histoire et évolution de l'informatique
 
-![width:700](./img/histoire-info.webp)
+![width:700](./img/intro_histoire-info.webp)
 <!-- _class: lead -->
 
 ---
 ## L'informatique en entreprise dans le temps
 </br>
 
-![center w:1200](./img/entreprise-histo.png)
+![center w:1200](./img/intro_entreprise_histo.png)
 
 ---
 ## L'évolution des architectures
 </br>
 
-![center w:950](./img/architect-histo.png)
+![center w:950](./img/intro_architect_histo.png)
 
 ---
 ## L'évolution des systèmes
 </br>
 
-![center w:950](./img/system-histo.png)
+![center w:950](./img/intro_system_histo.png)
 
 ---
 ## L'évolution des organisations (1/3)
@@ -88,7 +88,7 @@ Les developpeurs
 * Developpent et livrent les packages
 * Ne sont pas impliqué dans la production
 * Innovent rapidement
-![bg w:500 right](./img/over%20the%20wall.png)
+![bg w:500 right](./img/intro_over_the_wall.png)
 
 ---
 ## L'évolution des organisations (2/3)
@@ -97,14 +97,14 @@ Les Administrateurs Systemes
 * Installent, maintiennent et opérent
 * Up and Running 24/7/365
 * Besoin de stabilité
-![bg w:500 right](./img/over%20the%20wall.png)
+![bg w:500 right](./img/intro_over_the_wall.png)
 
 ---
 ## L'évolution des organisations (3/3)
 Depuis ~ 2010
 Nouvelles méthodes, partiques, état d'esprit
 
-![center w:1000](./img/devops_goal.png)
+![center w:1000](./img/intro_devops_goal.png)
 
 ---
 # LE DEVOPS
@@ -169,7 +169,7 @@ Nouvelles méthodes, partiques, état d'esprit
 * Des échanges régulier 
 * Retour d'expérience
 
-![bg fit right](./img/devops-share.png)
+![bg fit right](./img/devops_share.png)
 
 ---
 # Comment ça se traduit en vrai ?
@@ -186,7 +186,7 @@ Nouvelles méthodes, partiques, état d'esprit
 *[Werner Vogels](https://en.wikipedia.org/wiki/Werner_Vogels)*
 - Rien à la main tout dans du code
 - Organisation Agile
-![bg fit right](./img/squad-team.png)
+![bg fit right](./img/devops_squad_team.png)
 
 
 ---
@@ -198,7 +198,7 @@ Nouvelles méthodes, partiques, état d'esprit
   * Réduire le Time to Market 
   * Amélioration Continue 
 
-![bg fit left](./img/Kanban.png)
+![bg fit left](./img/devops_kanban.png)
 
 ---
 ## Méthodes Agiles
@@ -217,7 +217,7 @@ Nouvelles méthodes, partiques, état d'esprit
 * Scrum Master / Team lead
 * Tech Lead
 * DevOps
-![center](./img/devops-teams.png)
+![center](./img/devops_teams.png)
 ---
 ## Les Rituels d'équipe (1/2)
 * Stand up meeting 
@@ -239,7 +239,7 @@ Nouvelles méthodes, partiques, état d'esprit
 
 ---
 # L'outillage DevOps
-![h:500 w:800](./img/DevOps%20Tools.png)
+![h:500 w:800](./img/devops_tools.png)
 <!-- _class: lead -->
 ---
 ## Quel type d'outils? 
@@ -250,7 +250,7 @@ Nouvelles méthodes, partiques, état d'esprit
 * CI / CD
 * Packaging
 * Sécurité
-![bg fit right](./img/devops-landscape.jpeg)
+![bg fit right](./img/devops_landscape.jpeg)
 *[img](https://mms.businesswire.com/media/20180625005106/en/664797/5/p-table-v3-1200x627.jpg?download=1)*
 
 ---
@@ -295,13 +295,13 @@ Nouvelles méthodes, partiques, état d'esprit
 # Gestion de Code
 </br>
 
-![w:500](./img/Git-logo.png)
+![w:500](./img/git_logo.png)
 <!-- _class: lead -->
 
 ---
 # Vous avez 30 minutes
 
-![w:500](./img/Git-logo.png)
+![w:500](./img/git_logo.png)
 
 Qu'est ce que c'est?
 A quoi ça sert? 
@@ -313,8 +313,8 @@ Comment ça fonctionne?
 - Créer en 2005 par Linus Torvalds 
 - Suivre les changements dans le code
 - Sytème basé sur des branches
-![w:400](./img/trunk-base-system.png)
-![bg left](./img/LinusTorvalds.jpeg)
+![w:400](./img/git_trunk_base_system.png)
+![bg left](./img/git_linus_torvalds.jpeg)
 
 ---
 ## Les commandes de bases (1/7)
@@ -354,7 +354,7 @@ git log
 git log --oneline
 git log --oneline --revert
 ```
-![w:900 h:400 center](./img/git-log.png)
+![w:900 h:400 center](./img/git_log.png)
 
 ---
 ## Les commandes de bases (4/7)
@@ -435,7 +435,7 @@ ADD CAPUTURE AVEC EXPLICATION
 - Indique a git les fichiers et/ou dossiers à ne pas prendre en considération
 
 - [github.com/github/gitignore](https://github.com/github/gitignore) 
-![bg right:48% w:650](./img/gitignore.png)
+![bg right:48% w:650](./img/git_gitignore.png)
 
 ---
 ## Hands On (1/2)
@@ -481,7 +481,7 @@ Comment ça fonctionne?
 - Développé en Go par Hashicorp
 - Utilise le langage HCL (Hashicorp Configuratio Language)
 
-![bg right:50%](./img/hashicorp_logo.png)
+![bg right:50%](./img/terraform_hashicorp_logo.png)
 
 ---
 ## Qu'est ce que Terraform ? (2/2)
@@ -489,7 +489,7 @@ Comment ça fonctionne?
   - Versionning
   - Test 
   - Packaging
-![bg left w:700](./img/hcl.png)
+![bg left w:700](./img/terraform_hcl.png)
 
 ---
 ## Comment fonctionne Terraform ?
@@ -529,14 +529,38 @@ brew install terraform
 ---
 <h2> providers.tf </h2>
 
+- Configuration de connexion à l'API du Cloud 
+
+![center w:700](./img/terraform_providers.png)
+
 ---
 <h2> versions.tf </h2>
+
+- Indique à Terraform quelles versions utiliser pour: 
+  - Terraform
+  - modules <img src="./img/terraform_version.png" style="position:absolute; left:50%; width:600px">
+  - providers
+
 
 ---
 <h2> backend.tf </h2>
 
+- Fichier de configuration pour le stockage des states
+- Si ce fichier n'existe pas le states seront local
+- Différents backend existent
+  - S3 <img src="./img/terraform_backend.png" style="position:absolute; left:50%; width:600px">
+  - GCS 
+  - secret kubernetes
+  - PostgreSQL
+
+
+
 ---
 <h2> main.tf </h2>
+
+- Fichier de description des ressources.
+ 
+![center w:1000](./img/terraform_resource_ec2-tf.png)
 
 ---
 <h2> variables.tf (1/4) </h2>
@@ -549,7 +573,6 @@ variable "varibale name"{
   default = ""
 }
 ```
-
 ---
 
 <h2> variables.tf - Les types simple (2/4) </h2>
@@ -622,25 +645,95 @@ variable "varibale name"{
 
 <h2> outputs.tf </h2>
 
-return value after from resource
+- Permet d'afficher des informations des ressources créer
+- `terraform output`
+```
+output "Mon output"{
+  value = resource_type.resource_name.resource_object
+}
+```
+
+---
+
+## Les Fonctions builtin
+|fonctions| descriptions|
+|---------|-------------|
+|count|Permet de réaliser une boucle sur une ressource|
+|element|Permet de parcourir des element d'une liste|
+|length|Permet de compter le nombre d'élément dans une liste|
+|lookup|Permet dans un dictionnaire de récupérer la valeur d'un clé|
+
+*[Documentation](https://developer.hashicorp.com/terraform/language/functions)*
 
 ---
 ## Les modules 
 
-they are containers for multiples resources that are used together
-A module consite of a collection of TF file kept together in a directory
-Main way to package and reuse resources configuration
+- Façon de packager des scripts Terraform
+- Permet de réutiliser et de standardiser le déploiement d'une infrastructure
+- Peut etre dans:
+  - un dossier local
+  - un repository Git
 
 ---
-## Les Fonctions builtin
-|fonctions| descriptions|
-|---------|-------------|
-|count||
-|element||
-|length||
-|lookup||
+## Hands on
 
-*[Documentation](https://developer.hashicorp.com/terraform/language/functions)*
+---
+# Gestion de Configurations
+</br>
+
+![w:800 center](./img/ansible_logo.png)
+<!-- _class: lead -->
+
+---
+# Vous avez 30 minutes
+
+![w:800 center](./img/ansible_logo.png)
+
+Qu'est ce que c'est?
+A quoi ça sert? 
+Comment ça fonctionne? 
+<!-- _class: lead -->
+
+---
+## Qu'est ce qu'Ansible
+
+- Gestionnaire de configuration écrit en Python
+- Utilise SSH et WinRM
+- Description de configuration en YAML
+- Utilise un système d'inventaire
+
+---
+## Composant de bases d'Ansible 
+
+- Inventaire (inventory)
+- Modules
+- Variables
+- Playbooks
+- Facts
+---
+## Modules
+
+---
+## Inventaire Ansibles
+
+---
+## Playbook Ansible
+
+---
+## Variables
+
+---
+## Facts
+
+---
+## Playbooks Advances tips
+
+- Condition
+- Loop
+- templating
+- error handling
+
+## Roles Ansible
 
 ---
 ## Hands on
