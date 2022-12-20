@@ -107,9 +107,18 @@ Nouvelles méthodes, partiques, état d'esprit
 ![center w:1000](./img/intro_devops_goal.png)
 
 ---
-# LE DEVOPS
+# Le DevOps
 ![bg w:600 left](./img/devops_home.png)
 <!-- _class: lead -->
+
+---
+# Vous avez 60 minutes
+![w:400 left](./img/devops_home.png)
+Qu'est ce que c'est?
+D'ou ca vient ? 
+A quoi ca sert ? 
+<!-- _class: lead -->
+
 
 ---
 ## Qu'est ce c'est?
@@ -426,8 +435,6 @@ Afficher les changements sur un fichier
 git diff <file name>
 ```
 
-ADD CAPUTURE AVEC EXPLICATION
-
 ---
 ## Git ignore
 - Fichier `.gitignore`
@@ -642,6 +649,16 @@ variable "varibale name"{
 </table>
 
 ---
+<h2> variables.tf - La précédences (4/4) </h2>
+
+- Manualy
+- Default value
+- Env var TF_VAR_[var name]
+- terraform.tfvars file
+- *.auto.tfvars file
+- Command line -var or -var-file parameter
+
+---
 
 <h2> outputs.tf </h2>
 
@@ -675,7 +692,29 @@ output "Mon output"{
   - un repository Git
 
 ---
-## Hands on
+## Hands on (1/2)
+
+- Créer dans la région Paris:
+  - 1 VPC
+  - 1 sous-réseau public
+  - 2 sous-réseau privé
+  - 1 security group autorisant le SSH
+- Le script doit avoir en outpus
+  - Le CIDR de chaque sous-réseau et son ID
+  - ARN du security group
+
+---
+## Hands on (2/3)
+![bg fit right ](./img/terraform_tp2.png)
+- Créer un module vous permettant de créer un VPC et des sous-reséaux.
+  - Le module doit permettre de créer des sous-réseaux privé et public
+- Créer 2 instance EC2 dans un sous-réseau privé créé par le module.
+- Installer Nginx sur la VM
+---
+## Hands on (3/3)
+![bg fit right ](./img/terraform_tp2-1.png)
+- A partir du script existant ajouter 1 Vm bastion acessible en SSH depuis internet uniquement depuis votre IP public
+- Ajouter un security group aux VM Nginx permettant à la vm bastion de les contacter en SSH 
 
 ---
 # Gestion de Configurations
@@ -698,10 +737,18 @@ Comment ça fonctionne?
 ## Qu'est ce qu'Ansible
 
 - Gestionnaire de configuration écrit en Python
-- Utilise SSH et WinRM
+- Utilise SSH et WinRM pour communiquer avec le système
 - Description de configuration en YAML
 - Utilise un système d'inventaire
 
+---
+## Le YAML
+- Fichier contenant des informations sous la forme clé-valeur
+- Les informations peuvent etres de types:
+  - string
+  - list
+  - map
+![bg fit right:50%](./img/ansible_yaml.png)
 ---
 ## Composant de bases d'Ansible 
 
@@ -710,30 +757,425 @@ Comment ça fonctionne?
 - Variables
 - Playbooks
 - Facts
----
-## Modules
 
 ---
-## Inventaire Ansibles
+## Structure d'un projet Ansible simple
+![center w:900](./img/ansible_project_structure.png)
+
+[Documentation](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html#directory-layout)
+
+---
+## Inventaire Ansibles (1/3)
+
+- Fichier regroupant les informations des machines
+- Les machines peuvent etre classé dans des groupes
+  - un groupe par défaut = **all**
+- 2 types d'inventaire existent:
+  - Statique
+  - Dynamique
+
+---
+## Inventaire Ansible Statique (2/3)
+
+- 2 format pour décrire un inventaire
+  - fichier INI / Plat
+  - fichier YAML
+<img src="./img/ansible_inv_yaml.png" style="position:absolute; right:55%; width:550px">  <img src="./img/ansible_inv_ini.png" style="position:absolute; left:50%; width:800px"> 
+
+[documentation](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html)
+
+---
+## Inventaire Ansible Dynamique (3/3)
+
+- Utilise un plugin  pour réaliser l'inventaire
+- Se base sur les tags/ labels définie sur les instances.
+- [Exemple pour EC2 sur AWS](https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html)
+
+---
+## Modules (1/2)
+
+- La création de tache se fait à l'aide de module
+  - [module library](https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html)
+- Chaque module est décrit dans une page 
+- Il est possible de développer ces propre modules avec Python
+
+---
+## Modules (2/2)
+
+- Les modules de bases pour le système linux
+  - yum / apt
+  - systemd
+  - user
+  - copy
+  - file
+  - template
 
 ---
 ## Playbook Ansible
+- Fichier regroupant un ensemble de "task"
+- S'applique sur un host ou un groupe d'host de l'inventaire
+- `ansible-playbook playbook.yml` permet d'executer le playbook
+
+![bg fit right](./img/ansible_playbook.png)
 
 ---
-## Variables
+## Variables (1/2)
+- Fichier YAML
+- Appel aux variables dans les playbooks
+```yaml
+tasks:
+  - name: "install {{package_name}}"
+    apt:
+      name: "{{package_name}}"
+      state: present
+```
+
+
+---
+## Variables (2/2)
+- Plusieurs niveaux de Variables
+  - variable par défaut d'un role (default/main.yaml)
+  - variable d'inventarire groups_vars/all
+  - variable inventaire du groupe
+  - variable inventaire du host
+  - variable venant des facts de hosts
+  - variable de paramètre d'un role (vars/main.yaml)
+  - variable passer avec la option -e
 
 ---
 ## Facts
+- Informations relevées par Ansible pour chaque Host
+- Afficher sous la forme d'un JSON
+- toutes les variables de Facts sont préfixé par `ansible_*`
+- peuvent-etre appeler dans un playbook sous la forme
+
+```yaml
+host_distrubution: {{ansible_facts['distribution']}}
+```
+[documentation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_vars_facts.html)
 
 ---
-## Playbooks Advances tips
+## Playbooks Advances tips (1/6)
 
 - Condition
-- Loop
-- templating
-- error handling
+```yaml
+tasks:
+  - name: Shut down CentOS 6 systems
+    ansible.builtin.command: /sbin/shutdown -t now
+    when:
+      - ansible_facts['distribution'] == "CentOS"
+      - ansible_facts['distribution_major_version'] == "6"
+```
+---
+## Playbooks Advances tips (2/6)
+- Loop over list
+```yaml
+- name: Add several users
+  ansible.builtin.user:
+    name: "{{ item }}"
+    state: present
+    groups: "wheel"
+  loop:
+     - testuser1
+     - testuser2
+```
+---
+## Playbooks Advances tips (3/6)
+- Loop over dict
+```yaml
+- name: Using dict2items
+  ansible.builtin.debug:
+    msg: "{{ item.key }} - {{ item.value }}"
+  loop: "{{ tag_data | dict2items }}"
+  vars:
+    tag_data:
+      Environment: dev
+      Application: payment
+```
 
+---
+## Playbooks Advances tips (4/6)
+- Loop over List of dict
+```yaml
+- name: Add several users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    state: present
+    groups: "{{ item.groups }}"
+  loop:
+    - { name: 'testuser1', groups: 'wheel' }
+    - { name: 'testuser2', groups: 'root' }
+```
+---
+## Playbooks Advances tips (5/6)
+- templating de fichier de fait à l'aide de JINJA 2 et du module template
+
+
+---
+## Playbooks Advances tips (6/6)
+- error handling
+```yaml
+- name: Fail task when the command error output prints FAILED
+  ansible.builtin.command: /usr/bin/example-command -x -y -z
+  register: command_result
+  failed_when: "'FAILED' in command_result.stderr"
+```
+- changed definition
+```yaml
+ - name: Report 'changed' when the return code is not equal to 2
+    ansible.builtin.shell: /usr/bin/billybass --mode="take me to the river"
+    register: bass_result
+    changed_when: "bass_result.rc != 2"
+```
+
+---
 ## Roles Ansible
+- C'est un ensemble de tasks réutilisable et paramètrable
+- Herberge dans Github / Gitlab ou Ansible Galaxy
+- Création d'un role
+`ansible-galaxy init mon_role`
+- Créer automatique l'ensemble <img src="./img/ansible_roles.png" style="position:absolute; left:50%; width:600px">
+des dossiers et fichiers 
 
 ---
 ## Hands on
+- Déployer avec l'aide de terraform 3 VMs dans un sous-réseau public
+- 1 vm dans un groupe ansible load-balancer
+- 2 vm dans un groupe server-web
+- sur la VM load-balancer installez et configurez HAProxy pour qu'il load balance l'ensemble du traffic sur les serveurs web
+- sur les vm server-web installez nginx et déployez sur chaque server un fichier index.html différent permettant d'indentifier sur quel serveur la requete est traité.
+
+---
+# Packaging
+</br>
+
+![w:800 center](./img/packaging_packer_logo.png)
+<!-- _class: lead -->
+
+---
+# Vous avez 30 minutes
+
+![w:600 center](./img/packaging_packer_logo.png)
+
+Qu'est ce que c'est?
+A quoi ça sert? 
+Comment ça fonctionne? 
+<!-- _class: lead -->
+
+---
+## Qu'est ce que Packer?
+
+- Solution de packing d'image système multi-plateform
+  - AWS/ Azure / GCP
+  - VMWare / VirtualBox ...
+[documentation](https://developer.hashicorp.com/packer/plugins)
+- Permet de standardiser les déploiements système
+- Utilise JSON ou HCL pour décrire la configuration
+  [documentation](https://developer.hashicorp.com/packer/docs/templates)
+
+---
+## Les éléments de base d'un template
+
+<table style="margin-left: auto; margin-right: auto;">
+  <tr>
+    <th style="background-color: rgb(69,90,99); color: white">Element</th>
+    <th style="background-color: rgb(69,90,99); color: white">Description</th>
+  </tr>
+  <tr>
+    <td>Builder/Plugin</td>
+    <td>components of Packer that are able to create a machine image for a single platform</td>
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+    <td>build</td>
+    <td>are a single task that eventually produces an image for a single platform</td>
+  </tr>
+  <tr>
+    <td>Provisionner</td>
+    <td> components of Packer that install and configure software within a running machine prior to that machine being turned into a static image</td>
+  </tr>
+</table>
+
+---
+## Hands on
+
+- Créer une image standard ubuntu, incluant une stack LAMP de bases
+
+---
+# Packaging
+</br>
+
+![w:400 center](./img/packaging_docker_logo.webp)
+<!-- _class: lead -->
+
+---
+# Vous avez 30 minutes
+
+![w:350 center](./img/packaging_docker_logo.webp)
+
+Qu'est ce que c'est?
+A quoi ça sert? 
+Comment ça fonctionne? 
+<!-- _class: lead -->
+
+---
+## Qu'est ce qu'un container (1/2)
+
+- Environnement d'éxcution isolé
+- S'appuis des images système de bases
+  - Ubunut / Debian / Alpine
+- Contient l'ensemble des dépendances au bon fonctionnement de l'application
+- Chaque container dispose d'un espace kernel "personnel"
+  - espace kernel = namespaces système
+  - un namespace est un regroupement de processus
+  - un accès restreint aux ressources de l'hote = Cgroup
+
+---
+## Qu'est ce qu'un container (2/2)
+![center w:650 ](./img/packaging_docker_container_schema.png)
+
+---
+## Qu'est ce que Docker
+- Solution de containerisation leader du marché
+- Multi- plateform
+- Met à disposition pour simplifier l'utilisation des containers: 
+  - CLI (Command Line Interface)
+  - Docker compose <img src="./img/packaging_docker_logo2.png" style="position:absolute; left:50%; width:600px">
+  - Docker Desktop
+  - Docker Hub
+
+---
+## Comment ca fonctionne ? 
+![center w:1200](./img/packaging_docker_working.png)
+
+---
+## Les commandes de base (1/2)
+<table style="margin-left: auto; margin-right: auto;">
+  <tr>
+    <th style="background-color: rgb(69,90,99); color: white">Commandes</th>
+    <th style="background-color: rgb(69,90,99); color: white">Description</th>
+  </tr>
+  <tr>
+    <td>docker run</td>
+    <td>construit et démarre un nouveau container</td>
+  </tr>
+  <tr>
+    <td>docker start/stop/pause</td>
+    <td>démarre, arrête ou met en pause un container.</td>
+  </tr>
+  <tr>
+    <td>docker ps</td>
+    <td>Liste les containers en cours d’execution</td>
+  </tr>
+  <tr>
+    <td>docker logs</td>
+    <td>affiche les logs d’un containers</td>
+  </tr>
+</table>
+[documentation](https://docs.docker.com/engine/reference/commandline/docker/)
+
+---
+## Les commandes de base (2/2)
+
+<table style="margin-left: auto; margin-right: auto;">
+  <tr>
+    <th style="background-color: rgb(69,90,99); color: white">Commandes</th>
+    <th style="background-color: rgb(69,90,99); color: white">Description</th>
+  </tr>
+  <tr>
+    <td>docker images</td>
+    <td>listes les images disponible</td>
+  </tr>
+  <tr>
+    <td>docker build</td>
+    <td>construit une image à partir d’un dockerfile</td>
+  </tr>
+  <tr>
+    <td>docker tag</td>
+    <td>permet de tags une images</td>
+  </tr>
+  <tr>
+    <td>docker rm</td>
+    <td>supprime un container</td>
+  </tr>
+  <tr>
+    <td>docker rmi</td>
+    <td>supprime une images
+</td>
+  </tr>
+</table>
+
+[documentation](https://docs.docker.com/engine/reference/commandline/docker/)
+
+---
+## Construire son image avec Dockerfile
+- Fichier décrivant étape par étape comment construire l'image
+```Dockerfile
+FROM alpine:3.14.2
+
+RUN apk add --no-cache python3 py-pip
+RUN mkdir /opt/blog_scrapper
+WORKDIR /opt/blog_scrapper
+COPY requirements.txt
+RUN python3 -m pip install -r requirements.txt --no-cache
+COPY scipt.py /opt/blog_scrapper/
+COPY config.json /opt/blog_scrapper
+CMD ["python3", "script.py"]
+```
+[documentation](https://docs.docker.com/engine/reference/builder/)
+
+---
+## Image docker un modèle en couche
+- Chaque ligne du docker file est une couche
+- Chaque couche dépend de la précédente
+![center w:1100](./img/packaging_docker_layer.png)
+
+---
+## Stocker ses images dans une registry
+- Registry public <img src="./img/packaging_docker_hub.png" style="position:absolute; left:50%; width:600px">
+  - DockerHub 
+  - quay.io
+  - gcr.io
+- Registry privé
+  - DockerHub
+  - Harbor
+  - JCR 
+
+---
+## Intéragrir avec une registry
+
+<table style="margin-left: auto; margin-right: auto;">
+  <tr>
+    <th style="background-color: rgb(69,90,99); color: white">Commandes</th>
+    <th style="background-color: rgb(69,90,99); color: white">Description</th>
+  </tr>
+  <tr>
+    <td>docker login</td>
+    <td>Se connecter à une registry</td>
+  </tr>
+  <tr>
+    <td>docker push</td>
+    <td>Upload une image dans une registry</td>
+  </tr>
+  <tr>
+    <td>docker pull</td>
+    <td>Télécharger une image d'une registry</td>
+  </tr>
+  <tr>
+    <td>docker search</td>
+    <td>chercher une image dans un registry</td>
+  </tr>
+  </tr>
+</table>
+
+[documentation](https://docs.docker.com/engine/reference/commandline/docker/)
+
+---
+## Hands on
+1) Développer le Dockerfile permettant d’afficher une page WEB
+  - images de base nginx
+  - héberger une page index.html personnelle
+  - Démarrer le container et afficher la page
+2)  Construire l’image
+3)  Publier l’image sur le Docker hub ou une autre registry
