@@ -12,7 +12,7 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_internet_gateway" "gw" {
-    vpc_id = "${aws_vpc.main.id}"
+    vpc_id = aws_vpc.main.id
 
     tags = {
       Name = "terraform_igw"
@@ -21,9 +21,9 @@ resource "aws_internet_gateway" "gw" {
 }
 
 resource "aws_route" "route"{
-    route_table_id  = "${aws_vpc.main.default_route_table_id}"
+    route_table_id  = aws_vpc.main.default_route_table_id
     destination_cidr_block  = "0.0.0.0/0"
-    gateway_id  = "${aws_internet_gateway.gw.id}"
+    gateway_id  = aws_internet_gateway.gw.id
 }
 
 resource "aws_subnet" "public" {
