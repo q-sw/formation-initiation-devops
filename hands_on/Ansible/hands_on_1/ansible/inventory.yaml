@@ -1,0 +1,22 @@
+all:
+  hosts:
+    web1:
+      ansible_ssh_private_key_file: "~/Workspace/test/lab2-key"
+      ansible_user: "ubuntu"
+      ansible_host: "15.237.117.75"
+    web2:
+      ansible_ssh_private_key_file: "~/Workspace/test/lab2-key"
+      ansible_user: "ubuntu"
+      ansible_host: "13.38.113.49"
+    lb-1:
+      ansible_ssh_private_key_file: "~/Workspace/test/lab2-key"
+      ansible_user: "ubuntu"
+      ansible_host: "13.38.70.250"
+  children:
+    webserver:
+      hosts:
+        web1:
+        web2:
+    lb:
+      hosts:
+        lb-1:

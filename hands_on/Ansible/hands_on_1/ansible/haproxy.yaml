@@ -1,0 +1,32 @@
+- hosts: lb
+  become: yes
+  tasks:
+  - name: "Update system"
+    apt: 
+      name: "*"
+      state: latest
+      update_cache: yes
+
+  - name: "Install haproxy"
+    apt: 
+      name: "haproxy"
+      state: present
+      update_cache: yes
+
+  - name: "Push Haprox configuration"
+    template:
+      src: "haproxy.cfg.j2"
+      dest: /etc/haproxy/haproxy.cfg
+      backup: yes
+
+  - name: "Restart Haproxy"
+    systemd:
+      name: "haproxy"
+      state: restarted
+      enabled: yes
+  
+  - name: "push file"
+    ansible.builtin.copy:
+      src: mon_fichier
+      dest: /etc/haproxy/mon_fichier
+  

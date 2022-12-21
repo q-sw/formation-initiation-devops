@@ -1,0 +1,28 @@
+---
+- hosts: webserver
+  become: yes
+  tasks:
+  - name: "Update system"
+    ansible.builtin.apt:
+      name: "*"
+      state: latest
+      update_cache: yes
+
+  - name: "Install Nginx"
+    ansible.builtin.apt:
+      name: "nginx"
+      state: present
+      update_cache: yes
+  
+  - name: "Push index.html"
+    ansible.builtin.template:
+      src: index.html.j2
+      dest: /var/www/html/index.html
+
+  - name: "Enable nginx on boot"
+    ansible.builtin.systemd:
+      name: nginx
+      enabled: yes
+      state: restarted
+      
+      
