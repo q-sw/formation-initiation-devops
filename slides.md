@@ -1073,6 +1073,7 @@ Comment ça fonctionne?
     <td>affiche les logs d’un containers</td>
   </tr>
 </table>
+
 [documentation](https://docs.docker.com/engine/reference/commandline/docker/)
 
 ---
@@ -1172,10 +1173,60 @@ CMD ["python3", "script.py"]
 [documentation](https://docs.docker.com/engine/reference/commandline/docker/)
 
 ---
-## Hands on
+## Hands on (1/2)
 1) Développer le Dockerfile permettant d’afficher une page WEB
   - images de base nginx
   - héberger une page index.html personnelle
   - Démarrer le container et afficher la page
 2)  Construire l’image
 3)  Publier l’image sur le Docker hub ou une autre registry
+---
+
+## Hands on (2/2)
+1) Développer un Dockerfile, permettant de construire une toolbox DevOps
+2) la toolbox inclura les outils
+
+|Tools|Tools|
+|----|---|
+|Terraform|Ansible|
+|AWS CLI v2| Git|
+|Github CLI | Checkov|
+
+3) Publier l'image sur le Docker ou, sur AWS
+
+---
+# CI / CD
+
+<img src="./img/cicd_github_action_logo.png" style="position:relavite; width:700px; margin-left:300px" >
+
+<!-- _class: lead -->
+
+---
+# Vous avez 30 minutes
+
+<img src="./img/cicd_github_action_logo.png" style="position:relavite; width:700px; margin-left:300px" >
+
+<!-- _class: lead -->
+---
+## Qu'est ce que c'est?
+- Systeme de CICD de Github.
+- Permet l'execution de pipeline à l'aide d'action
+- Une action peut etre existante et communautaire OU peut etre personnelle
+- Une Pipeline / Workflows se décrit en YAML
+- Les fichiers doivent se trouver à la racine du projet dans `.github/workflows`
+
+---
+## Construction d'une pipeline
+- Une pipeline se déclenche: 
+  - à la reception d'une évènement
+  - manuellement
+- Une pipeline est constitué de JOBS
+- Un JOB est constitué de STEPS
+
+![bg fit right](./img/cicd_github_action_code.png)
+
+---
+## Hands on
+
+- Reprendre le dockerfile toolbox
+- faire en sorte que github action build et publie l'image à chaque nouveau commit
